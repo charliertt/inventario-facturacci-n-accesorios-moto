@@ -1,0 +1,27 @@
+{% load static %}
+<div class="modal fade" id="eliminar_usuario{{ usuario.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalDanger1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h6 class="modal-title m-0 text-white" id="exampleModalDanger1">Eliminar Usuario # {{ usuario.id }}</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{% url 'borrar_usuario' usuario.id %}">
+                    {% csrf_token %}
+                   
+                    <div class="col-lg-12 text-center">
+                        <h5>¿Desea eliminar este Usuario?</h5>
+                        <span class="badge bg-soft-secondary">{{usuario.nombre}}</span>
+                        <small class="text-muted ms-2">{{ usuario.profile.fecha|date:'Y-m-d' }}</small>
+                      
+                    </div>
+                    <div class="modal-footer">                                                    
+                        <button type="submit" class="btn btn-soft-secondary btn-sm">Aceptar</button>
+                        <button type="button" class="btn btn-soft-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,354 @@
+{% load static %}
+
+<style>
+    #detalle_bloque {
+      display: none;
+    }
+  </style>
+
+<div class="modal fade" id="venta_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalDefaultSignup" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title m-0" id="exampleModalDefaultSignup">Venta</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div><!--end modal-header-->
+            <div class="modal-body">
+                <div class="auth-page">
+                    <div class="auth-card">
+                        <div class="">
+                            <div class="px-3">
+                                <div class="auth-logo-box text-center">
+                                    <a href="analytics-index.html" class="logo logo-admin"><img src="{% static  'assets/images/LogoMulticopias.jpg' %}" height="40" alt="logo" class="auth-logo"></a>
+                                </div><!--end auth-logo-box-->
+
+                                <div class="text-center auth-logo-text">
+                                    <h4 class="mt-0 m2-3 mt-3">MulticopiasLa12</h4>
+                                    <p class="text-muted mb-0">Selecciona el Producto.</p>  
+                                </div> <!--end auth-logo-text-->  
+                                {{error}}
+                               
+                                    
+                                    <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nombre</th>
+                                            <th>Cantidades Disponibles</th>
+                                            <th>Valor</th>
+                                            <th>Accion</th>
+                                        </tr>
+                                        </thead>
+    
+    
+                                        <tbody>
+                                            {% for producto in productos %}
+                                        <tr>
+                                            <td id="id">{{ producto.id }}</td>
+                                            <td id="nombre">{{ producto.nombre }}</td>
+                                            <td id="tallas" class="text-center">
+                                                {% if producto.stock_talla1 > 0 %}
+                                                <span class="badge bg-primary rounded-pill">S - {{ producto.stock_talla1 }} </span>
+                                            {% endif %}
+                                            
+                                                {% if producto.stock_talla2 > 0 %}
+                                                    <span class="badge bg-success rounded-pill">M - {{ producto.stock_talla2 }} </span>
+                                                {% endif %}
+                                            
+                                                {% if producto.stock_talla3 > 0 %}
+                                                    <span class="badge bg-secondary rounded-pill">L - {{ producto.stock_talla3 }} </span>
+                                                {% endif %}
+                                            
+                                                {% if producto.stock_talla4 > 0 %}
+                                                    <span class="badge bg-warning rounded-pill">XL - {{ producto.stock_talla4 }} </span>
+                                                {% endif %}
+                                            </td>
+                                            <td id="valor">{{ producto.valor_compra }}</td>
+                                            <td> 
+                                                <a class="btn btn-sm btn-soft-success boton-producto" 
+                                                href="#" 
+                                                role="button" 
+                                                data-id="{{ producto.id }}" 
+                                                data-nombre="{{ producto.nombre }}"
+                                                data-valor="{{ producto.valor_compra }}"
+                                                data-stock-talla1="{{ producto.stock_talla1 }}" 
+                                                data-stock-talla2="{{ producto.stock_talla2 }}" 
+                                                data-stock-talla3="{{ producto.stock_talla3 }}" 
+                                                data-stock-talla4="{{ producto.stock_talla4 }}">
+                                                <i class="fas fa-plus me-2"></i>
+                                             </a>
+                                            </td>
+                                            
+                                        </tr>
+                                        
+                                        {%endfor%}
+                                     
+                                       
+                                        </tbody>
+                                    </table>
+                                   
+                                    <div class="text-center">
+                                    <div id="detalle_bloque">
+                                    <h4 class="mt-0 m2-3 mt-3">Detalle</h4>
+                                    <div class="d-flex mb-3">
+                                    <p class="text-muted mb-0">Seleccione Talla.</p>
+                                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                        <option selected>Eliga una opción</option>
+                                        <option value="1">S</option>
+                                        <option value="2">M</option>
+                                        <option value="3">L</option>
+                                        <option value="4">XL</option>
+                                      </select>
+                                 
+                                      <input class="form-control" type="number" id="cantidad" placeholder="Ingrese cantidad">
+                                    </div>
+                                  
+                                    
+                                </div>
+                                    
+                                    </div>
+                                    
+        
+                                    <div class="form-group mb-0 row">
+                                        <div class="col-12 mt-2">
+                                            <button class="btn btn-primary btn-rounded btn-block" id="generar" type="submit">Continuar <i class="fas fa-plus me-2"></i>  </button>
+                                        </div><!--end col--> 
+                                    </div> <!--end form-group-->                           
+                                </form><!--end form-->
+                            </div><!--end /div-->
+
+
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function () {
+                                        var stockTallasFunction;
+                                        var idProducto;  // Variable para almacenar el id del producto seleccionado
+                                        var botonProducto = document.querySelectorAll('.boton-producto');
+                                        var generar = document.getElementById("generar");
+                                        var tabla = document.getElementById("tablita");
+                                        var contenedor = document.getElementById("contenedor");
+                                        var imagen= document.getElementById("imagen");
+                                        
+                                        var detalle_bloque = document.getElementById("detalle_bloque");
+                                        var select = document.getElementById("floatingSelect");
+                                        var entradaCantidad = document.getElementById('cantidad');
+                                        var carrito = {};
+                                        var subtotal_global = 0;
+                                        
+                                        
+                                        function verificarCarrito() {
+
+                                        if (Object.keys(carrito).length === 0) {
+                                            imagen.style.display = "block";
+                                            contenedor.style.display = "none";
+
+                                        }else{
+                                            imagen.style.display = "none";
+                                            contenedor.style.display = "block";
+                                          
+                                        }
+                                    }
+
+                                        verificarCarrito()
+
+
+
+
+                                    
+                                        botonProducto.forEach(function (boton) {
+                                            boton.addEventListener("click", function () {
+                                                // Actualizar la variable idProducto al hacer clic en un botón de producto
+                                                idProducto = boton.dataset.id;
+                                    
+                                                stockTallasFunction = function () {
+                                                    return {
+                                                        "S": boton.dataset.stockTalla1,
+                                                        "M": boton.dataset.stockTalla2,
+                                                        "L": boton.dataset.stockTalla3,
+                                                        "XL": boton.dataset.stockTalla4,
+                                                    };
+                                                };
+                                    
+                                                detalle_bloque.style.display = "block";
+                                    
+                                                select.innerHTML = '<option selected>Elija una opción</option>';
+                                    
+                                                for (var talla in stockTallasFunction()) {
+                                                    if (stockTallasFunction()[talla] > 0) {
+                                                        var option = document.createElement("option");
+                                                        option.value = talla;
+                                                        option.text = talla;
+                                                        select.add(option);
+                                                    }
+                                                }
+                                    
+                                                select.addEventListener('change', function () {
+                                                    var tallaSeleccionada = this.value;
+                                                    entradaCantidad.max = stockTallasFunction()[tallaSeleccionada];
+                                                });
+                                                
+                                            });
+                                        });
+                                    
+                                        generar.addEventListener("click", function () {
+                                            // Mover la declaración de 'id' aquí para obtener el valor correcto al hacer clic
+                                            var id = document.getElementById("id").textContent;
+                                            var talla_seleccionada = select.options[select.selectedIndex].value;
+                                            var nombre = document.querySelector('.boton-producto[data-id="' + idProducto + '"]').getAttribute('data-nombre'); 
+                                            var valor = document.querySelector('.boton-producto[data-id="' + idProducto + '"]').getAttribute('data-valor');
+                                            var valorFormateado = parseFloat(valor);
+                                            var subtotal_nodo = document.getElementById("subtotal");
+                                            var cantidadSelector = document.getElementById("cantidad").value;
+                                            var cantidad = parseInt(cantidadSelector);
+                                            var total = cantidad * valorFormateado;
+                                            var clave = idProducto + '-' + talla_seleccionada;
+                                            console.log(clave);
+                                
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Agregado al Carrito',
+                                            toast: true,
+                                            position: 'top-end',
+                                            showConfirmButton: false,
+                                            timer: 3000
+                                        });
+                                
+                                        confirmarVenta.style.display = "block";
+                                        textoSubtotal.style.display = "block";
+                                        subtotal_global += total;
+                                        subtotal_nodo.innerHTML = subtotal_global;
+                                
+                                        if (carrito.hasOwnProperty(clave)) {
+                                            carrito[clave].cantidad += cantidad;
+                                            carrito[clave].total += total;
+                                
+                                            var filaExistente = document.getElementById('producto-' + clave);
+                                            filaExistente.querySelector('.cantidad').value = carrito[clave].cantidad;
+                                            filaExistente.querySelector('.total').innerHTML = carrito[clave].total;
+                                        } else {
+                                            carrito[clave] = {
+                                                id: idProducto,
+                                                nombre: nombre,
+                                                talla: talla_seleccionada,
+                                                cantidad: cantidad,
+                                                valor: valorFormateado,
+                                                total: total
+                                            };
+                                
+                                            var fila = `
+                                                <tr id="producto-${clave}">
+                                                    <td>${idProducto}</td>
+                                                    <td>${nombre}</td>
+                                                    <td>${talla_seleccionada}</td>
+                                                    <td><input type="number" class="form-control cantidad" value="${cantidad}"></td>
+                                                    <td>${valor}</td>
+                                                    <td><span class="badge badge-md badge-boxed badge-soft-success total-producto">${total}</span></td>
+                                                    <td><button class="btn btn-danger borrar"  data-clave="${clave}" style="background-color: #f5325c; width: 100px;">X</button></td>
+                                                </tr>
+                                            `;
+                                
+                                            document.getElementById("tablita").insertAdjacentHTML('beforeend', fila);
+                                            console.log(carrito);
+                                             verificarCarrito()
+
+                                        }
+
+                                        var botonesBorrar = document.querySelectorAll('.borrar');
+                                        botonesBorrar.forEach(function(boton) {
+                                            boton.addEventListener('click', function() {
+                                                var claveProducto = this.getAttribute('data-clave');
+                                                console.log("clave",claveProducto); 
+                                                subtotal_global -= carrito[claveProducto].total;
+                                                subtotal_nodo.innerHTML = subtotal_global
+                                                delete carrito[claveProducto];
+                                                 verificarCarrito()
+                                               
+                                                var filaProducto = document.getElementById('producto-' + claveProducto);
+                                                filaProducto.remove();
+                                                
+
+                                            });
+                                            
+                                        });
+
+                                        document.querySelector('.cantidad').addEventListener('input', function() {
+                                            var cantidad = parseInt(this.value);
+                                            console.log('Cantidad:', cantidad);
+                                            
+                                            var valorFormateado = parseFloat(valor);
+                                            console.log('Valor Formateado:', valorFormateado);
+                                            
+                                            var total = cantidad * valorFormateado;
+                                            console.log('Total:', total);
+                                            
+                                            // Actualiza el total para este producto específico
+                                            var totalElement = this.parentElement.parentElement.querySelector('.total-producto');
+                                            console.log('Elemento Total:', totalElement);
+                                            totalElement.textContent = total;
+                                            
+                                            // Calcula el subtotal sumando todos los totales
+                                            var allTotals = document.querySelectorAll('.total-producto');
+                                            console.log('Todos los Totales:', allTotals);
+                                            
+                                            var subtotal = 0;
+                                            allTotals.forEach(function(totalElement) {
+                                                subtotal += parseFloat(totalElement.textContent);
+                                            });
+                                            console.log('Subtotal:', subtotal);
+                                            
+                                            subtotal_nodo.textContent = subtotal;
+});
+});
+                                
+                                    var confirmarVenta = document.getElementById('confirmarVenta');
+                                
+                                    confirmarVenta.addEventListener("click", function () {
+                                        var carritoJSON = JSON.stringify(carrito);
+                                
+                                        var formData = new FormData();
+                                        formData.append('carrito', carritoJSON);
+                                        formData.append('subtotal_global', subtotal_global);
+                                
+                                        fetch('/ventas/', {
+                                            method: 'POST',
+                                            body: formData
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            console.log(data);
+                                        })
+                                        .catch((error) => {
+                                            console.error('Error:', error);
+                                        });
+                                
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: "Venta registrada exitosamente",
+                                            toast: true,
+                                            position: 'top-end',
+                                            showConfirmButton: false,
+                                            timer: 3000
+                                        });
+                                
+                                        setTimeout(function () {
+                                            location.reload();
+                                        }, 2000);
+                                    });
+                                });
+                                
+                                
+                              </script>
+                            
+                            <div class="m-3 text-center text-muted">
+                              
+                            </div>
+                        </div><!--end card-body-->
+                    </div><!--end card-->                                                        
+                </div><!--end auth-page-->                                                    
+            </div><!--end modal-body-->
+            
+        </div><!--end modal-content-->
+    </div><!--end modal-dialog-->
+</div><!--end modal-->
+</div><!--end card-body-->
+</div><!--end card-->                            
+</div> <!-- end col -->  <!--end modal-->

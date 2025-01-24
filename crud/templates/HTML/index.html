@@ -1,0 +1,555 @@
+{% extends "base.html" %}
+
+
+{% load static %}
+
+{% block content %}
+
+{% load humanize %}
+
+
+    <body class="">
+        <!-- Left Sidenav -->
+        {% include 'menu.html' %}  
+        <!-- end left-sidenav-->
+        
+
+        <div class="page-wrapper">
+            <!-- Top Bar Start -->
+            <div class="topbar">            
+                <!-- Navbar -->
+                <nav class="navbar-custom">    
+                    <ul class="list-unstyled topbar-nav float-end mb-0">  
+                        <li class="dropdown hide-phone">
+                            <a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="false" aria-expanded="false">
+                           
+                            </a>
+                            
+                            <div class="dropdown-menu dropdown-menu-end dropdown-lg p-0">
+                                <!-- Top Search Bar -->
+                              
+                            </div>
+                        </li>                      
+
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="false" aria-expanded="false">
+                                
+                                <span class="badge bg-danger rounded-pill noti-icon-badge">2</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-lg pt-0">
+                            
+                                <h6 class="dropdown-item-text font-15 m-0 py-3 border-bottom d-flex justify-content-between align-items-center">
+                                    Notifications <span class="badge bg-primary rounded-pill">2</span>
+                                </h6> 
+                                <div class="notification-menu" data-simplebar>
+                                    <!-- item-->
+                                    <a href="#" class="dropdown-item py-3">
+                                        <small class="float-end text-muted ps-2">2 min ago</small>
+                                        <div class="media">
+                                            <div class="avatar-md bg-soft-primary">
+                                                <i data-feather="shopping-cart" class="align-self-center icon-xs"></i>
+                                            </div>
+                                            <div class="media-body align-self-center ms-2 text-truncate">
+                                                <h6 class="my-0 fw-normal text-dark">Your order is placed</h6>
+                                                <small class="text-muted mb-0">Dummy text of the printing and industry.</small>
+                                            </div><!--end media-body-->
+                                        </div><!--end media-->
+                                    </a><!--end-item-->
+                                    <!-- item-->
+                                    <a href="#" class="dropdown-item py-3">
+                                        <small class="float-end text-muted ps-2">10 min ago</small>
+                                        <div class="media">
+                                            <div class="avatar-md bg-soft-primary">
+                                                <img src="assets/images/users/user-4.jpg" alt="" class="thumb-sm rounded-circle">
+                                            </div>
+                                            <div class="media-body align-self-center ms-2 text-truncate">
+                                                <h6 class="my-0 fw-normal text-dark">Meeting with designers</h6>
+                                                <small class="text-muted mb-0">It is a long established fact that a reader.</small>
+                                            </div><!--end media-body-->
+                                        </div><!--end media-->
+                                    </a><!--end-item-->
+                                    <!-- item-->
+                                    <a href="#" class="dropdown-item py-3">
+                                        <small class="float-end text-muted ps-2">40 min ago</small>
+                                        <div class="media">
+                                            <div class="avatar-md bg-soft-primary">                                                    
+                                                <i data-feather="users" class="align-self-center icon-xs"></i>
+                                            </div>
+                                            <div class="media-body align-self-center ms-2 text-truncate">
+                                                <h6 class="my-0 fw-normal text-dark">UX 3 Task complete.</h6>
+                                                <small class="text-muted mb-0">Dummy text of the printing.</small>
+                                            </div><!--end media-body-->
+                                        </div><!--end media-->
+                                    </a><!--end-item-->
+                                    <!-- item-->
+                                    <a href="#" class="dropdown-item py-3">
+                                        <small class="float-end text-muted ps-2">1 hr ago</small>
+                                        <div class="media">
+                                            <div class="avatar-md bg-soft-primary">
+                                                <img src="assets/images/users/user-5.jpg" alt="" class="thumb-sm rounded-circle">
+                                            </div>
+                                            <div class="media-body align-self-center ms-2 text-truncate">
+                                                <h6 class="my-0 fw-normal text-dark">Your order is placed</h6>
+                                                <small class="text-muted mb-0">It is a long established fact that a reader.</small>
+                                            </div><!--end media-body-->
+                                        </div><!--end media-->
+                                    </a><!--end-item-->
+                                    <!-- item-->
+                                    <a href="#" class="dropdown-item py-3">
+                                        <small class="float-end text-muted ps-2">2 hrs ago</small>
+                                        <div class="media">
+                                            <div class="avatar-md bg-soft-primary">
+                                                <i data-feather="check-circle" class="align-self-center icon-xs"></i>
+                                            </div>
+                                            <div class="media-body align-self-center ms-2 text-truncate">
+                                                <h6 class="my-0 fw-normal text-dark">Payment Successfull</h6>
+                                                <small class="text-muted mb-0">Dummy text of the printing.</small>
+                                            </div><!--end media-body-->
+                                        </div><!--end media-->
+                                    </a><!--end-item-->
+                                </div>
+                                <!-- All-->
+                                <a href="javascript:void(0);" class="dropdown-item text-center text-primary">
+                                    View all <i class="fi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="false" aria-expanded="false">
+                                <span class="ms-1 nav-user-name hidden-sm"i data-feather="user" class="align-self-center icon-xs icon-dual me-1"></i> 
+                                    {% if user.is_authenticated %}
+
+                                    <p>Hola, {{ user.username }}!</p>
+                                    {% else %}
+                                        <p>Hola, visitante!</p>
+                                    {% endif %}
+                                </span>
+                                                  
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                             
+                                <div class="dropdown-divider mb-0"></div>
+                                <a class="dropdown-item" href="/cerrar_sesion/"> Hola, {{ user.username }}</a>
+                                <a class="dropdown-item" href="/cerrar_sesion/"><i data-feather="power" class="align-self-center icon-xs icon-dual me-1"></i>Cerrar Sesión</a>
+                                
+                            </div>
+                        </li>
+                    </ul><!--end topbar-nav-->
+        
+                    <ul class="list-unstyled topbar-nav mb-0">                        
+                        <li>
+                            <button class="nav-link button-menu-mobile">
+                                <i data-feather="menu" class="align-self-center topbar-icon"></i>
+                            </button>
+                        </li> 
+                        <li class="creat-btn">
+                            <div class="nav-link">
+                                <a class=" btn btn-sm btn-soft-primary" href="#" role="button"  data-bs-toggle="modal" data-bs-target="#nuevo_usuario"><i class="fas fa-plus me-2"></i>Nuevo Usuario </a>
+                            </div>                                
+                            {% include 'crear_usuario.html' %}  
+                        </li>                           
+                    </ul>
+                </nav>
+                {% if messages %}
+
+
+                {% for message in messages %}
+                <script>
+                    var messageType = '{{ message.tags }}';
+                    var messageText = '{{ message }}';
+            
+                    if (messageType === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: messageText,
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    } else if (messageType === 'error') {
+                        Swal.fire({
+                            icon: 'error',
+                            title: messageText,
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    }
+                </script>
+            {% endfor %}
+
+                {% endif %}
+
+                       
+                <!-- end navbar-->
+            </div>
+            <!-- Top Bar End -->
+
+            <!-- Page Content-->
+            <div class="page-content">
+                <div class="container-fluid">
+                    <!-- Page-Title -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="page-title-box">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="page-title">Analiticos</h4>
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="javascript:void(0);">MulticopiasLa12</a></li>
+                                            <li class="breadcrumb-item active">Administrador</li>
+                                        </ol>
+                                    </div><!--end col-->
+                                   <!--end col-->  
+                                </div><!--end row-->                                                              
+                            </div><!--end page-title-box-->
+                        </div><!--end col-->
+                    </div><!--end row-->
+                    <!-- end page title end breadcrumb -->
+                    <div class="row justify-content-center">
+                        <div class="col-md-6 col-lg-2">
+                            <div class="card report-card">
+                                <div class="card-body">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col">
+                                            <p class="text-dark mb-1 font-weight-semibold">Total Venta</p>
+                                            <h3 class="m-0">{{valor_total|intcomma }}  </h3>
+                                            <p class="mb-0 text-truncate text-muted"><span class="text-success"><i class="mdi mdi-checkbox-marked-circle-outline me-1"></i></p>
+                                        </div>
+                                        <div class="col-auto align-self-center">
+                                            <div class="report-main-icon bg-light-alt">
+                                                <i data-feather="layers" class="align-self-center text-muted icon-md"></i>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!--end card-body--> 
+                            </div><!--end card--> 
+                        </div> <!--end col--> 
+                        <div class="col-md-6 col-lg-2">
+                            <div class="card report-card">
+                                <div class="card-body">
+                                    <div class="row d-flex justify-content-center">                                                
+                                        <div class="col">
+                                            <p class="text-dark mb-1 font-weight-semibold">Valor Compra</p>
+                                            <h3 class="m-0"> {{valor_compra_total|intcomma }}  </h3>
+                                            <p class="mb-0 text-truncate text-muted"><span class="text-success"><i class="mdi  mdi-checkbox-marked-circle-outline me-1"></i></span> </p>
+                                        </div>
+                                        <div class="col-auto align-self-center">
+                                            <div class="report-main-icon bg-light-alt">
+                                                <i data-feather="check-square" class="align-self-center text-muted icon-md"></i>  
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div><!--end card-body--> 
+                            </div><!--end card--> 
+                        </div> <!--end col-->                         
+                        <div class="col-md-6 col-lg-2">
+                            <div class="card report-card">
+                                <div class="card-body">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col">  
+                                            <p class="text-dark mb-1 font-weight-semibold">Neto</p>                                         
+                                            <h3 class="m-0">{{neto|intcomma }} </h3>
+                                            <p class="mb-0 text-truncate text-muted"><span class="text-muted"></span> 
+                                                 </p>
+                                                 <span class="text-success"><i class="mdi  mdi-checkbox-marked-circle-outline me-1"></i></span> 
+                                                 
+                                        </div>
+                                        <div class="col-auto align-self-center">
+                                            <div class="report-main-icon bg-light-alt">
+                                                <i data-feather="dollar-sign" class="align-self-center text-muted icon-md"></i>  
+                                                
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div><!--end card-body--> 
+                            </div><!--end card--> 
+                        </div>
+                        <div class="col-md-6 col-lg-2">
+                            <div class="card report-card">
+                                <div class="card-body">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col">  
+                                            <p class="text-dark mb-1 font-weight-semibold">Neto C/U</p>                                         
+                                            <h3 class="m-0">${{netoCU|intcomma }}  </h3>
+                                            <p class="mb-0 text-truncate text-muted"><span class="text-success"><i class="mdi  mdi-checkbox-marked-circle-outline me-1"></i></span> </p>
+                                                
+                                        </div>
+
+
+                                        
+                                        <div class="col-auto align-self-center">
+                                            <div class="report-main-icon bg-light-alt">
+                                                <i data-feather="dollar-sign" class="align-self-center text-muted icon-md"></i>    
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div><!--end card-body--> 
+                            </div><!--end card--> 
+                        </div> <!--end col--> 
+                        <div class="col-md-6 col-lg-2">
+                            <div class="card report-card">
+                                <div class="card-body">
+                                    <div class="row d-flex justify-content-center">                                                
+                                        <div class="col">
+                                            <p class="text-dark mb-1 font-weight-semibold">Productos Sin Stock</p>
+                                            <h3 class="m-0">{{total_tallas_cero|intcomma }}  </h3>
+                                            <p class="mb-0 text-truncate text-muted"><span class="text-dark"> </span>
+                                        </div>
+                                        <div class="col-auto align-self-center">
+                                            <div class="report-main-icon bg-light-alt">
+                                                <i data-feather="check-square" class="align-self-center text-muted icon-md"></i>   
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div><!--end card-body--> 
+                            </div><!--end card--> 
+                        </div> <!--end col-->                               
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row align-items-center">
+                                        <div class="col">                      
+                                            <h4 class="card-title">Registro de Usuarios</h4>                      
+                                        </div><!--end col-->
+                                        <!--end col-->
+                                    </div>  <!--end row-->                                  
+                                </div><!--end card-header-->                                
+                                <div class="card-body">
+                                    <ul class="list-group custom-list-group mb-n3">
+                                        {% for usuario in usuarios %}
+                                        <li class="list-group-item align-items-center d-flex justify-content-between pt-0">
+                                            <div class="media">
+                                                
+                                                <div class="media-body align-self-center"> 
+                                                    <h6 class="m-0">{{usuario.nombre}} {{usuario.apellido}}</h6>
+                                                    <p class="mb-0 text-muted"> {{usuario.correo}} </p>                                                                                                                                                                                     
+                                                </div><!--end media body-->
+                                            </div>
+                                            <div class="align-self-center">
+                                                
+                                                <a href="" class="btn btn-sm btn-soft-warning text-dark" data-bs-toggle="modal" data-bs-target="#editar_usuario{{ usuario.id }}">Editar <i class="las la-external-link-alt font-15"></i></a>  
+
+                                                <a href="" class="btn btn-sm btn-soft-danger" data-bs-toggle="modal" data-bs-target="#eliminar_usuario{{ usuario.id }}">Borrar <i class="las la-external-link-alt font-15"></i></a>
+                                                
+                                            </div>   
+                                            {% include 'editar_usuario.html' %}  
+                                             
+
+                                        </li>
+                                        
+                                        {% include 'eliminar_usuario.html' %} 
+
+                                        {% endfor %}
+                                    </ul>                                
+                                </div><!--end card-body--> 
+                            </div><!--end card--> 
+                            <!--end card-->
+                        </div> <!--end col--> 
+                        <!--end col-->
+                        
+                        
+                        <div class="col-lg-6">
+                            <div class="card">   
+                                <div class="card-header">
+                                    <div class="row align-items-center">
+                                        <div class="col">                      
+                                            <h4 class="card-title">Lista de Productos sin Stock</h4>                      
+                                        </div><!--end col-->
+                                        <div class="col-auto"> 
+                                                     
+                                        </div><!--end col-->
+                                    </div>  <!--end row-->                                  
+                                </div><!--end card-header-->                                              
+                                <div class="card-body"> 
+                                    <div class="analytic-dash-activity" data-simplebar>
+                                        {% for producto in productos_agotados %}
+
+                                        <div class="activity">
+                                            <div class="activity-info">
+                                                <div class="icon-info-activity">
+                                                    <i class="las la-user-clock bg-soft-primary"></i>
+                                                </div>
+                                                <div class="activity-info-text">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <p class="text-muted mb-0 font-13 w-75">
+                                                            <span>{{producto.nombre}} </span> 
+                                                          <a href=""> #{{producto.id}}</a>
+                                                        </p>
+                                                        
+                                                        <small class="text-muted">
+                                                            Tiene la talla {{ producto.talla }} agotada
+                                                        </small>
+                                                    </div>    
+                                                </div>
+                                            </div>   
+
+                                          
+                                            
+                                            </div>                                                                                 {% endfor %}                                                     
+                                        </div><!--end activity-->
+                                    </div><!--end analytics-dash-activity-->
+                                </div>  <!--end card-body-->                                     
+                            </div><!--end card--> 
+                        </div><!--end col--> 
+                       
+                    </div><!--end row-->
+                    <div class="row">                        
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row align-items-center">
+                                        <div class="col">                      
+                                            <h4 class="card-title">Últimas ventas</h4>                      
+                                        </div><!--end col-->                                        
+                                    </div>  <!--end row-->                                  
+                                </div><!--end card-header-->
+                                <div class="card-body">
+                                    <div class="table-responsive browser_users">
+                                        <table class="table mb-0">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th class="border-top-0">#</th>
+                                                    <th class="border-top-0">Fecha</th>
+                                                    <th class="border-top-0">Nombre</th>
+                                                    <th class="border-top-0">Cantidad</th>
+                                                    <th class="border-top-0">Precio</th>
+                                                     <th class="border-top-0">Total</th>
+                                                </tr><!--end tr-->
+                                            </thead>
+                                            <tbody>
+                                                {% for registro in Registro_ventas|slice:":5" %}
+    <tr>                                                        
+        <td>#{{registro.id}}</td>
+        <td><a href="" class="text-primary">{{registro.fecha}} </a></td>
+        <td>{{registro.nombre}} - {{registro.talla}}</td>
+        <td> {{registro.cantidad}}</td>
+        <td> {{registro.valor_compra|intcomma}} <i class="fas fa-caret-up text-success font-16"></i></td>
+        <td>{{registro.total|intcomma}} <i class="fas fa-caret-up text-success font-16"></i></td>
+    </tr>
+{% endfor %}
+                                                
+                                                                     
+                                            </tbody>
+                                        </table> <!--end table-->                                               
+                                    </div><!--end /div-->
+                                </div><!--end card-body--> 
+                            </div><!--end card--> 
+                        </div> <!--end col-->   
+                        
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row align-items-center">
+                                        <div class="col">                      
+                                            <h4 class="card-title">Registro de Productos</h4>                      
+                                        </div><!--end col-->                                        
+                                    </div>  <!--end row-->                                  
+                                </div><!--end card-header-->
+                                <div class="card-body">
+                                    <div class="table-responsive browser_users">
+                                        <table class="table mb-0" id="datatable">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th class="border-top-0">#</th>
+                                                    <th class="border-top-0">Fecha</th>
+                                                    <th class="border-top-0">Producto</th>
+                                                    <th class="border-top-0 text-center">Cantidad Disponible-Talla</th>
+                                                    <th class="border-top-0">Precio</th>
+                                                </tr><!--end tr-->
+                                            </thead>
+                                            <tbody>
+                                                {% for producto in productos %}
+                                                <tr>                                                        
+                                                    <td>{{producto.id}} </td>
+                                                    <td>{{ producto.fecha|date:"d \d\e F \d\e Y" }}</td>                                   
+                                                    <td>{{producto.nombre}} </td>
+                                                    <td> 
+                                                       
+                                                        <span class="badge {% if producto.stock_talla1 == 0 %}bg-danger{% else %}bg-primary{% endif %} rounded-pill">S - {{ producto.stock_talla1 }} </span>
+                                                        <span class="badge {% if producto.stock_talla2 == 0 %}bg-danger{% else %}bg-success{% endif %} rounded-pill">M - {{ producto.stock_talla2 }} </span>
+                                                        <span class="badge {% if producto.stock_talla3 == 0 %}bg-danger{% else %}bg-secondary{% endif %} rounded-pill">L - {{ producto.stock_talla3 }} </span>
+                                                        <span class="badge {% if producto.stock_talla4 == 0 %}bg-danger{% else %}bg-warning{% endif %} rounded-pill">XL - {{ producto.stock_talla4 }} </span>
+                                                    </td>
+                                                    <td>{{producto.valor_compra|intcomma}} </td>
+                                                </tr>
+                                                 {%endfor%} <!--end tr-->     
+                                               <!--end tr-->                             
+                                            </tbody>
+                                        </table> <!--end table-->                                               
+                                    </div><!--end /div--> 
+                                </div><!--end card-body--> 
+                            </div><!--end card--> 
+                        </div> <!--end col-->
+                    </div><!--end row-->
+                    
+
+                </div><!-- container -->
+
+                <footer class="footer text-center text-sm-start">
+                    &copy; <script>
+                        document.write(new Date().getFullYear())
+                    </script> MulticopiasLa12 <span class="text-muted d-none d-sm-inline-block float-end"> <i
+                            class="mdi mdi-heart text-danger"></i> MulticopiasLa12</span>
+                </footer><!--end footer-->
+            </div>
+            <!-- end page content -->
+        </div>
+        <!-- end page-wrapper -->
+
+        
+
+
+        <!-- jQuery  -->
+        <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+        <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'assets/js/metismenu.min.js' %}"></script>
+        <script src="{% static 'assets/js/waves.js' %}"></script>
+        <script src="{% static 'assets/js/feather.min.js' %}"></script>
+        <script src="{% static 'assets/js/simplebar.min.js' %}"></script>
+        <script src="{% static 'assets/js/moment.js' %}"></script>
+        <script src="{% static 'plugins/daterangepicker/daterangepicker.js' %}"></script>
+
+
+          
+        
+        <!-- Required datatable js -->
+        <script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'plugins/datatables/dataTables.bootstrap5.min.js' %}"></script>
+        <!-- Buttons examples -->
+        <script src="{% static 'plugins/datatables/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'plugins/datatables/buttons.bootstrap5.min.js' %}"></script>
+        <script src="{% static 'plugins/datatables/jszip.min.js' %}"></script>
+        <script src="{% static 'plugins/datatables/pdfmake.min.js' %}"></script>
+        <script src="{% static 'plugins/datatables/vfs_fonts.js' %}"></script>
+        <script src="{% static 'plugins/datatables/buttons.html5.min.js' %}"></script>
+        <script src="{% static 'plugins/datatables/buttons.print.min.js' %}"></script>
+        <script src="{% static 'plugins/datatables/buttons.colVis.min.js' %}"></script>
+        <!-- Responsive examples -->
+        <script src="{% static 'plugins/datatables/dataTables.responsive.min.js' %}"></script>
+        <script src="{% static 'plugins/datatables/responsive.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'assets/pages/jquery.datatable.init.js' %}"></script>
+
+
+
+        <script src="{% static 'plugins/apex-charts/apexcharts.min.js' %}"></script>
+        <script src="{% static 'plugins/jvectormap/jquery-jvectormap-2.0.2.min.js' %}"></script>
+        <script src="{% static 'plugins/jvectormap/jquery-jvectormap-us-aea-en.js' %}"></script>
+        <script src="{% static 'assets/pages/jquery.analytics_dashboard.init.js' %}"></script>
+
+        <!-- App js -->
+        <script src="{% static 'assets/js/app.js' %}"></script>
+        
+    </body>
+
+    {% endblock %}
+</html>

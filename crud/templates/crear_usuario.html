@@ -1,0 +1,105 @@
+{% load static %}
+<div class="modal fade" id="nuevo_usuario" tabindex="-1" role="dialog" aria-labelledby="nuevo_usuario" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title m-0" id="nuevo_usuario">Registro de Usuarios</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div><!--end modal-header-->
+            <div class="modal-body">
+                <div class="auth-page">
+                    <div class="auth-card">
+                        <div class="">
+                            <div class="px-3">
+                                <div class="auth-logo-box text-center">
+                                    <a href="analytics-index.html" class="logo logo-admin"><img src="{% static  'assets/images/LogoMulticopias.jpg' %}" height="40" alt="logo" class="auth-logo"></a>
+                                </div><!--end auth-logo-box-->
+
+                                <div class="text-center auth-logo-text">
+                                    <h4 class="mt-0 m2-3 mt-3">MulticopiasLa12</h4>
+                                    <p class="text-muted mb-0">Registra un nuevo Usuario</p>  
+                                </div>
+
+                                <form class="form-horizontal auth-form" method="POST" action="{% url 'crear_usuario' %}">
+                                    {% csrf_token %}
+                                    {{error}}
+                                    <div class="row">
+                                        <!-- Primera división del formulario -->
+                                        <div class="col-md-6">
+                                            <div class="form-group mb-2">
+                                                <label class="form-label" for="username">Nombre</label>
+                                                <div class="input-group">                                                                                         
+                                                    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingrese Nombre">
+                                                </div>                                    
+                                            </div><!--end form-group--> 
+
+
+
+                                            <div class="form-group mb-2">
+                                                <label class="form-label" for="username">Usuario</label>
+                                                <div class="input-group">                                                                                         
+                                                    <input type="text" class="form-control" name="username" id="username" placeholder="Ingrese Usuario">
+                                                </div>                                    
+                                            </div>
+                                
+                                            <div class="form-group mb-2">
+                                                <label class="form-label" for="useremail">Correo</label>
+                                                <div class="input-group">                                                                                         
+                                                    <input type="email" class="form-control" name="correo" id="useremail" placeholder="Ingrese Correo">
+                                                </div>                                    
+                                            </div><!--end form-group-->
+                                
+                                         <!--end form-group--> 
+                                        </div>
+                                
+                                        <!-- Segunda división del formulario -->
+                                        <div class="col-md-6">
+
+                                            <div class="form-group mb-2">
+                                                <label class="form-label" for="username">Apellido</label>
+                                                <div class="input-group">                                                                                         
+                                                    <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingrese Apellido">
+                                                </div>                                    
+                                            </div>
+
+                                            <div class="form-group mb-2">
+                                                <label class="form-label" for="userpassword">Contraseña</label>                                            
+                                                <div class="input-group">                                  
+                                                    <input type="password" class="form-control" name="password" id="userpassword" placeholder="Ingresa Contraseña">
+                                                </div>                               
+                                            </div> <!--end form-group-->
+
+                                         
+                                            
+                                            <div class="form-group mb-2">
+                                                <label class="form-label" for="mo_number">Número Célular</label>                                            
+                                                <div class="input-group">                                 
+                                                    <input type="text" class="form-control" name="celular" id="mo_number" placeholder="Ingrese # Celular">
+                                                </div>                               
+                                            </div><!--end form-group-->  
+                                
+                                            <div class="form-group row my-3">
+                                                <div class="col-sm-12">
+                                                  
+                                                </div><!--end col-->                                             
+                                            </div><!--end form-group--> 
+                                
+                                            <!--end form-group-->  
+                                        </div>
+                                        <div class="form-group mb-0 row">
+                                            <div class="col-12">
+                                                <label class="form-label" for="mo_number">Rol</label> 
+                                                <select class="form-select mb-3" name="rol" aria-label="Default select example">
+                                                    <option selected>Seleccione un Rol</option>
+                                                    <option value="A">Administrador</option>
+                                                    <option value="U">Usuario</option>
+                                                  </select>
+
+                                                <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Registrar <i class="fas fa-sign-in-alt ms-1"></i></button>
+                                            </div><!--end col--> 
+                                        </div>
+                                    </div>                         
+                                </form>
+                                <!--end form-->
+</div>
+   

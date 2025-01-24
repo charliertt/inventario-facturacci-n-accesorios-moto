@@ -1,0 +1,45 @@
+{% load static %}
+<div class="left-sidenav">
+    <!-- LOGO -->
+    <div class="brand">
+        <a href="http://127.0.0.1:8000" class="logo">
+            <span>
+                <img src="{% static 'assets/images/LogoMulticopias.jpg '  %}" alt="logo-small" class="logo-sm">
+            </span>
+            <span>
+              MulticopiasLa12
+            </span>
+        </a>
+    </div>
+    <!--end logo-->
+    <div class="menu-content h-100" data-simplebar>
+        <ul class="metismenu left-sidenav-menu">
+            <li class="menu-label mt-0">Main</li>
+            <li>
+                <a href="javascript: void(0);"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Dashboard</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li class="nav-item"><a class="nav-link" href=""><i class="ti-control-record"></i>Analiticos</a></li>
+                
+                </ul>
+            </li>
+
+            <li>
+                <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Administrar</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+                   
+                    <li class="nav-item"><a class="nav-link" href="/registro/"><i class="ti-control-record"></i>Inventario</a></li>
+        
+                    <li class="nav-item"><a class="cnav-link" href="/ventas"><i class="ti-control-record"></i>Ventas</a></li>
+                 
+                  
+                </ul>
+            </li> 
+
+        
+
+                    
+        </ul>
+
+        
+    </div>
+</div>
